@@ -13,7 +13,7 @@ class SQLAlchemyExpenseCategoryRepository(SQLAlchemyAbstractRepository, ExpenseC
         """
         Retrieve an expense category by its ID.
         """
-        result: Result = await self._session.execute(select(ExpenseCategoryModel).filter_by(id=id))
+        result: Result = await self._session.execute(select(ExpenseCategoryModel).filter_by(_id=id))
         return result.scalar_one_or_none()
 
     async def get_by_code(self, code: str) -> Optional[ExpenseCategoryModel]:

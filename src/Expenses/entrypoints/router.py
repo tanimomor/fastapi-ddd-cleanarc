@@ -19,7 +19,6 @@ expense_category_router = APIRouter(
     status_code=status.HTTP_200_OK
 )
 async def get_all_categories(expense_categories = Depends(get_all_expense_categories)):
-    print(expense_categories)
     return [await i.to_dict() for i in expense_categories]
 
 
@@ -40,13 +39,12 @@ async def create_category(
     path=URLPathsConfig.DETAIL,
     response_class=JSONResponse,
     name=URLNamesConfig.DETAIL,
-    status_code=status.HTTP_200_OK,
-    response_model=ExpenseCategoryModel
+    status_code=status.HTTP_200_OK
 )
 async def get_category_by_id(
     expense_category = Depends(get_expense_category_by_id)
 ):
-    return expense_category
+    return await expense_category.to_dict()
 
 #
 # @expense_category_router.put(
